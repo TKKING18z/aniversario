@@ -1,3 +1,21 @@
+// Manejo de pantalla de carga
+window.addEventListener('load', function() {
+    // Ocultar pantalla de carga después de asegurar que todo ha cargado
+    setTimeout(function() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        loadingOverlay.style.opacity = '0';
+        setTimeout(function() {
+            loadingOverlay.style.display = 'none';
+        }, 500);
+    }, 1500); // Mostrar pantalla de carga por al menos 1.5 segundos
+});
+
+// Detector de dispositivo móvil
+function isMobileDevice() {
+    return (window.innerWidth <= 768) || 
+           (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+}
+
 // Contador de tiempo juntos
 function updateTimeCounter() {
     const startDate = new Date('2023-05-11');
@@ -26,6 +44,7 @@ const messages = {
 };
 
 function showMessage(photoId) {
+    const isMobile = isMobileDevice();
     Swal.fire({
         title: '¡Nuestro Momento Especial!',
         text: messages[photoId],
@@ -33,24 +52,32 @@ function showMessage(photoId) {
         confirmButtonText: '❤️',
         background: '#fff0f0',
         confirmButtonColor: '#ff4d4d',
+        width: isMobile ? '85%' : '500px',
+        padding: isMobile ? '10px' : '25px',
         showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: 'animate__animated animate__fadeInDown animate__faster'
         },
         hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
+            popup: 'animate__animated animate__fadeOutUp animate__faster'
         }
     }).then(() => {
         launchMiniConfetti();
     });
 }
 
-// Efecto de corazones flotantes en el fondo
+// Efecto de corazones flotantes en el fondo - optimizado para móvil
 function createHeart() {
     const heart = document.createElement('div');
     heart.innerHTML = '❤️';
     heart.className = 'floating-heart';
     heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = Math.random() * 20 + 14 + 'px';
+    
+    // Ajustar el tamaño según el dispositivo
+    const isMobile = isMobileDevice();
+    heart.style.fontSize = isMobile ? 
+        (Math.random() * 14 + 10 + 'px') : 
+        (Math.random() * 20 + 14 + 'px');
+    
     heart.style.opacity = Math.random() * 0.5 + 0.5;
     document.querySelector('.hearts-bg').appendChild(heart);
     
@@ -59,24 +86,26 @@ function createHeart() {
     }, 5000);
 }
 
-// Confetti effect
+// Confetti effect - optimizado para móvil
 function launchConfetti() {
+    const isMobile = isMobileDevice();
     const colors = ['#ff4d4d', '#ff6b6b', '#ff9999', '#ffcccc'];
     confetti({
-        particleCount: 150,
-        spread: 100,
+        particleCount: isMobile ? 80 : 150,
+        spread: isMobile ? 70 : 100,
         origin: { y: 0.6 },
         colors: colors,
         shapes: ['heart', 'circle'],
         gravity: 0.8,
-        scalar: 1.2
+        scalar: isMobile ? 0.8 : 1.2
     });
 }
 
 function launchMiniConfetti() {
+    const isMobile = isMobileDevice();
     const colors = ['#ff4d4d', '#ff6b6b', '#ff9999'];
     confetti({
-        particleCount: 50,
+        particleCount: isMobile ? 30 : 50,
         spread: 60,
         origin: { y: 0.8 },
         colors: colors
@@ -103,56 +132,59 @@ function setupMusicControl() {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    // Corregir heights para móviles
+    function setVhHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    // Ejecutar ahora y en cada redimensionamiento
+    setVhHeight();
+    window.addEventListener('resize', setVhHeight);
+    
     updateTimeCounter();
-    setInterval(updateTimeCounter, 1000 * 60 * 60); // Actualiza cada hora
-    setInterval(createHeart, 300);
+    setInterval(updateTimeCounter, 1000 * 60); // Actualizar cada minuto en vez de cada hora
+    
+    const isMobile = isMobileDevice();
+    setInterval(createHeart, isMobile ? 800 : 300); // Menos corazones en móvil para mejor rendimiento
+    
     setupMusicControl();
 
-    // Animated entrance for elements
-    const elementsToAnimate = [
-        document.querySelector('header'),
-        document.querySelector('.love-message'),
-        document.querySelector('.memory-gallery'),
-        document.querySelector('.timeline'),
-        document.querySelector('.love-buttons')
-    ];
-
-    elementsToAnimate.forEach((element, index) => {
-        setTimeout(() => {
-            element.style.opacity = '0';
-            element.style.animation = 'fadeIn 1s ease forwards';
-            element.style.animationDelay = index * 0.2 + 's';
-        }, 100);
-    });
-
-    // Surprise button
+    // Surprise button con detección de móvil
     document.getElementById('surpriseButton').addEventListener('click', function() {
         const message = document.getElementById('surpriseMessage');
         message.classList.remove('hidden');
+        message.classList.add('animate__animated', 'animate__zoomIn');
         launchConfetti();
         
+        const isMobile = isMobileDevice();
         Swal.fire({
             title: 'Te Amo',
             text: '¡Feliz segundo aniversario, mi amor! Gracias por estos dos años juntooosss.',
             imageUrl: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzh6NmE5YXlqZHp0ajZxcThzNngxc2thaGJ3Y3JsbGV5NGk0dGl2dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jsEqs3Q22zxRb6vkIZ/giphy.gif',
-            imageWidth: 200,
-            imageHeight: 200,
+            imageWidth: isMobile ? 150 : 200,
+            imageHeight: isMobile ? 150 : 200,
             imageAlt: 'Corazón animado',
             confirmButtonText: '❤️',
             background: '#fff0f0',
             confirmButtonColor: '#ff4d4d',
+            width: isMobile ? '85%' : '500px',
             showClass: {
-                popup: 'animate__animated animate__zoomIn'
+                popup: 'animate__animated animate__zoomIn animate__faster'
             }
         });
     });
     
-    // Love letter button
+    // Love letter button con animación mejorada
     document.getElementById('loveLetterBtn').addEventListener('click', function() {
         const letter = document.getElementById('loveLetter');
         letter.classList.remove('hidden');
+        letter.classList.add('animate__animated', 'animate__fadeInUp');
         launchMiniConfetti();
     });
+    
+    // Iniciar observador solo después de un pequeño retraso
+    setTimeout(createObserver, 500);
 });
 
 // Typing effect for the poem when visible
@@ -200,6 +232,3 @@ function animateTextFadeIn(parentElement) {
         p.style.animationDelay = index * 0.5 + 's';
     });
 }
-
-// Iniciar el observador cuando todo esté cargado
-window.addEventListener('load', createObserver);

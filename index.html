@@ -3,16 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff4d4d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Dos Años de Amor Infinito</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Dancing+Script:wght@400;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 
 <body>
+    <!-- Pantalla de carga -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-heart">❤️</div>
+    </div>
+
     <div class="hearts-bg"></div>
 
     <!-- Audio player -->
@@ -20,11 +29,11 @@
         <audio id="bgMusic" loop>
             <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
         </audio>
-        <button id="musicToggle"><i class="fas fa-music"></i></button>
+        <button id="musicToggle" aria-label="Reproducir música"><i class="fas fa-music"></i></button>
     </div>
 
     <div class="container">
-        <header>
+        <header class="animate__animated animate__fadeIn">
             <h1><i class="fas fa-heart"></i> Dos Años Juntos Mi Amor <i class="fas fa-heart"></i></h1>
             <div class="love-counter">
                 <p>Llevamos juntos:</p>
@@ -32,12 +41,12 @@
             </div>
         </header>
 
-        <div class="love-message">
+        <div class="love-message animate__animated animate__fadeIn animate__delay-1s">
             <p class="highlight">Gracias por compartir tantos recuerdos conmigo amor🥹</p>
             <p>Te amo más que ayer y menos que mañana ❤️</p>
         </div>
 
-        <section class="memory-gallery">
+        <section class="memory-gallery animate__animated animate__fadeIn animate__delay-2s">
             <h2><i class="fas fa-camera-retro"></i> Nuestros Momentos Especiales</h2>
             <div class="photos">
                 <div class="photo-item" onclick="showMessage(1)">
@@ -59,14 +68,14 @@
             </div>
         </section>
 
-        <section class="timeline">
+        <section class="timeline animate__animated animate__fadeIn animate__delay-3s">
             <h2><i class="fas fa-history"></i> Nuestro Camino Juntos</h2>
             <div class="timeline-container">
                 <div class="timeline-item">
                     <div class="timeline-date">Mayo 2023</div>
                     <div class="timeline-content">
                         <h3>El comienzo</h3>
-                        <p>Cuando nos hicimos novios amorrrr</p>
+                        <p>Cuando nuestras vidas se unieron</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -87,15 +96,15 @@
                     <div class="timeline-date">Mayo 2025</div>
                     <div class="timeline-content">
                         <h3>Dos años</h3>
-                        <p>Dos años de momentos inolvidables contigo mi changaaaa</p>
+                        <p>Dos años de momentos mágicos e inolvidables</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="love-buttons">
+        <section class="love-buttons animate__animated animate__fadeIn animate__delay-4s">
             <button id="surpriseButton" class="btn-pulse"><i class="fas fa-gift"></i> ¡Click para una Sorpresa!</button>
-            <button id="loveLetterBtn" class="btn-glow"><i class="fas fa-envelope-open-heart"></i> Carta de
+            <button id="loveLetterBtn" class="btn-glow"><i class="fas fa-envelope"></i> Carta de
                 Amor</button>
         </section>
 
