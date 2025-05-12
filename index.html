@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dos Años de Amor Infinito</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Dancing+Script:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="hearts-bg"></div>
+
+    <!-- Audio player -->
+    <div class="music-player">
+        <audio id="bgMusic" loop>
+            <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
+        </audio>
+        <button id="musicToggle"><i class="fas fa-music"></i></button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heart"></i> Dos Años Juntos Mi Amor <i class="fas fa-heart"></i></h1>
+            <div class="love-counter">
+                <p>Llevamos juntos:</p>
+                <div id="timeCounter"></div>
+            </div>
+        </header>
+
+        <div class="love-message">
+            <p class="highlight">Gracias por compartir tantos recuerdos conmigo amor🥹</p>
+            <p>Te amo más que ayer y menos que mañana ❤️</p>
+        </div>
+
+        <section class="memory-gallery">
+            <h2><i class="fas fa-camera-retro"></i> Nuestros Momentos Especiales</h2>
+            <div class="photos">
+                <div class="photo-item" onclick="showMessage(1)">
+                    <div class="photo-content">❤️</div>
+                    <p class="photo-caption">Primera Cita</p>
+                </div>
+                <div class="photo-item" onclick="showMessage(2)">
+                    <div class="photo-content">💑</div>
+                    <p class="photo-caption">Primer Beso</p>
+                </div>
+                <div class="photo-item" onclick="showMessage(3)">
+                    <div class="photo-content">💖</div>
+                    <p class="photo-caption">Aventura Juntos</p>
+                </div>
+                <div class="photo-item" onclick="showMessage(4)">
+                    <div class="photo-content">🥰</div>
+                    <p class="photo-caption">Nuestro Amor</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline">
+            <h2><i class="fas fa-history"></i> Nuestro Camino Juntos</h2>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-date">Mayo 2023</div>
+                    <div class="timeline-content">
+                        <h3>El comienzo</h3>
+                        <p>Cuando nuestras vidas se unieron</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Noviembre 2023</div>
+                    <div class="timeline-content">
+                        <h3>Primer aniversario</h3>
+                        <p>Seis meses de amor y felicidad</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Mayo 2024</div>
+                    <div class="timeline-content">
+                        <h3>Un año juntos</h3>
+                        <p>Celebrando 365 días de amor</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Mayo 2025</div>
+                    <div class="timeline-content">
+                        <h3>Dos años</h3>
+                        <p>Dos años de momentos mágicos e inolvidables</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="love-buttons">
+            <button id="surpriseButton" class="btn-pulse"><i class="fas fa-gift"></i> ¡Click para una Sorpresa!</button>
+            <button id="loveLetterBtn" class="btn-glow"><i class="fas fa-envelope-open-heart"></i> Carta de
+                Amor</button>
+        </section>
+
+        <div id="surpriseMessage" class="hidden">
+            <h3><i class="fas fa-heart"></i> Mi Amor por Ti <i class="fas fa-heart"></i></h3>
+            <div class="poem">
+                <p>Te amo como no te imaginasssss,<br>
+                    Extraño todo de vos amorrr<br>
+                    sos mi todoooooo,<br>
+                    Te quier solo a vos en mi vidaaaa</p>
+            </div>
+        </div>
+
+        <div id="loveLetter" class="hidden">
+            <h3><i class="fas fa-pen-fancy"></i> Mi Carta para Ti</h3>
+            <div class="letter">
+                <p>Mi amor,</p>
+                <p>Han pasado dos años desde que comenzamos nuestra relacioon
+                    HA pasado tan rapido el tiempo amorrrr, pero hemos pasado muchos momentos juntos amorrr</p>
+                <p>Gracias por siempre estar conmigo amor y siempre aguantarme, y por siempre estar conmigo en las buenas y en las malas
+                    Usted es mi todooo</p>
+                <p>Te amo infinitamente,</p>
+                <p class="signature">Tu changonovio</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>❤️ <span id="currentDate"></span> ❤️</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
